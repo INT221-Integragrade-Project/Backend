@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.Optional;
 
 @RestController
 public class ProductRestController {
@@ -31,7 +31,7 @@ public class ProductRestController {
             Pageable pageable = PageRequest.of(pageNo, pageSize);
             Page<Product> pageResult = productJpaRepository.findAll(pageable);
             return pageResult.getContent();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ProductException("Can not show all product:" + e);
         }
     }
@@ -40,19 +40,20 @@ public class ProductRestController {
     public Product show(@PathVariable Long id) {
         try {
             return productJpaRepository.findById(id).orElse(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ProductException("Can not show product: " + e);
         }
     }
 
-     @PostMapping("/add")
-    public void addProduct(@RequestBody Product newproduct){
+    @PostMapping("/add")
+    public void addProduct(@RequestBody Product newproduct) {
         try {
             productJpaRepository.save(newproduct);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ProductException("Can not add product: " + e);
         }
     }
+
 
     @PutMapping("/edit/{id}")
     public void edit(@PathVariable long id,
@@ -75,16 +76,18 @@ public class ProductRestController {
             product.setImages(images);
             product.setBrandid(brandid);
             productJpaRepository.save(product);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ProductException("Can not edit product: " + e);
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable long id){
+    @DeleteMapping("/deleteproductid")
+    public void delete(@RequestParam("deleteproductid") long id) {
         try {
             productJpaRepository.deleteById(id);
-        }catch (Exception e){
+            System.out.println("You delete Product: " + id);
+        } catch (
+                Exception e) {
             throw new ProductException("Can not delete product: " + e);
         }
     }
