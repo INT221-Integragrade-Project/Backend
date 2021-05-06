@@ -30,12 +30,6 @@ public class ProductColorRestController {
         return productColorRepository.findById(id).orElse(null);
     }
 
-    //
-//    @PostMapping("/addproductcolor")
-//    public void addProductcolor(@RequestBody Productcolor productcolor){
-//        productColorRepository.save(productcolor);
-//    }
-//
     @DeleteMapping("/deletePodCol")
     public void deleteProductColor(@RequestParam("deletePodCol") long id) {
         int countproductcolor = productColorRepository.countByProductid(id);
