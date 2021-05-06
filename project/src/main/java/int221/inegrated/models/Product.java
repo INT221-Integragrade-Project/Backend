@@ -44,5 +44,4 @@ public class Product {
   @OneToMany(mappedBy = "product")
   Set<Productcolor> productcolor;
 
-
 }

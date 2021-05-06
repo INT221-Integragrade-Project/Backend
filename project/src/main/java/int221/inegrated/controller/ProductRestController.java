@@ -2,7 +2,10 @@ package int221.inegrated.controller;
 
 import int221.inegrated.Exception.ProductException;
 import int221.inegrated.models.Brand;
+import int221.inegrated.models.Color;
 import int221.inegrated.models.Product;
+import int221.inegrated.models.Productcolor;
+import int221.inegrated.repositories.ProductColorRepository;
 import int221.inegrated.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,8 @@ public class ProductRestController {
 
     @Autowired
     ProductRepository productJpaRepository;
+    @Autowired
+    ProductColorRepository productColorRepository;
 
     @GetMapping("/show")
     public List<Product> allProduct(@RequestParam(defaultValue = "0") Integer pageNo,
@@ -40,18 +45,25 @@ public class ProductRestController {
         }
     }
 
-    @PostMapping("/add")
-    public void addProduct(@RequestBody Product product){
+     @PostMapping("/add")
+    public void addProduct(@RequestBody Product newproduct){
         try {
-            productJpaRepository.save(product);
+            productJpaRepository.save(newproduct);
         }catch (Exception e){
             throw new ProductException("Can not add product: " + e);
         }
     }
 
     @PutMapping("/edit/{id}")
-    public void edit(@PathVariable long id, @RequestParam String productname, @RequestParam double price, @RequestParam long warranty, @RequestParam java.sql.Date menufacturrerdate
-    , @RequestParam long capacity, @RequestParam String description, @RequestParam String images, @RequestParam Brand brand) {
+    public void edit(@PathVariable long id,
+                     @RequestParam("productname") String productname,
+                     @RequestParam("price") double price,
+                     @RequestParam("warranty") long warranty,
+                     @RequestParam("menufacturrerdate") java.sql.Date menufacturrerdate,
+                     @RequestParam("capacity") long capacity,
+                     @RequestParam("description") String description,
+                     @RequestParam("images") String images,
+                     @RequestParam("brandid") long brandid) {
         try {
             Product product = productJpaRepository.findById(id).orElse(null);
             product.setProductname(productname);
@@ -60,6 +72,9 @@ public class ProductRestController {
             product.setMenufacturrerdate(menufacturrerdate);
             product.setCapacity(capacity);
             product.setDescription(description);
+            product.setImages(images);
+            product.setBrandid(brandid);
+            productJpaRepository.save(product);
         }catch (Exception e){
             throw new ProductException("Can not edit product: " + e);
         }

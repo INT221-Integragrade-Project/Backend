@@ -1,5 +1,6 @@
 package int221.inegrated.controller;
 
+import int221.inegrated.Exception.ProductException;
 import int221.inegrated.models.Productcolor;
 import int221.inegrated.repositories.ProductColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class ProductColorRestController {
     @PostMapping("/addproductcolor")
     public void addProductcolor(@RequestBody Productcolor productcolor){
         productColorRepository.save(productcolor);
+    }
+
+    @DeleteMapping("/removePodCol/{id}")
+    public void deleteProductColor(@PathVariable long id){
+            productColorRepository.deleteById(id);
     }
 }
