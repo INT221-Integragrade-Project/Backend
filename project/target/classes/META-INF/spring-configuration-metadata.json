@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "integrate.storage",
+      "type": "int221.inegrated.file.StorageProperties",
+      "sourceType": "int221.inegrated.file.StorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "integrate.storage.location",
+      "type": "java.lang.String",
+      "sourceType": "int221.inegrated.file.StorageProperties"
+    }
+  ],
+  "hints": []
+}
