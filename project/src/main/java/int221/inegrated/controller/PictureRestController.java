@@ -21,7 +21,7 @@ public class PictureRestController {
 
 
     @PostMapping("/upload")
-    public void uploadFile(@RequestParam("file") MultipartFile file) {
+    public void uploadFile(@RequestParam("images") MultipartFile file) {
         storageService.store(file);
         System.out.print("You ca upload file" + file);
     }
@@ -32,7 +32,7 @@ public class PictureRestController {
     }
 
     @DeleteMapping(value = "/deletefile/{filename}", produces = MediaType.IMAGE_PNG_VALUE)
-    public void deleteFile(@PathVariable String filename) throws IOException {
+    public void deleteFile(@RequestParam("images") String filename) throws IOException {
         storageService.delete(filename);
     }
 }
