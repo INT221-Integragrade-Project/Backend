@@ -7,3 +7,4 @@ services:
       - /home/project/Backend/project/public:/tmp
     ports:
       - "3000:80"
+    restart: on-failure
