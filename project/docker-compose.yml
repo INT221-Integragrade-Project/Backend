@@ -1,6 +1,9 @@
 version: "1.0"
 services:
   backend:
+    build: .
     image: myapp:latest
     volumes:
-      - public:/tmp/
+      - /home/project/Backend/project/public:/tmp
+    ports:
+      - "3000:80"
