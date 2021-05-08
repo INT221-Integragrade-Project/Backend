@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-public class Productcolor {
+public class productcolor {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter
@@ -22,8 +21,8 @@ public class Productcolor {
   private long colorid;
   @ManyToOne
   @JoinColumn(name = "productid",updatable = false,insertable = false)
-  private Product product;
+  private int221.inegrated.models.product product;
   @ManyToOne
   @JoinColumn(name = "colorid",insertable = false,updatable = false)
-  private Color color;
+  private int221.inegrated.models.color color;
 }

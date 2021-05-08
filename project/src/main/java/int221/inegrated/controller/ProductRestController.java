@@ -1,10 +1,7 @@
 package int221.inegrated.controller;
 
 import int221.inegrated.Exception.ProductException;
-import int221.inegrated.models.Brand;
-import int221.inegrated.models.Color;
-import int221.inegrated.models.Product;
-import int221.inegrated.models.Productcolor;
+import int221.inegrated.models.product;
 import int221.inegrated.repositories.ProductColorRepository;
 import int221.inegrated.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ProductRestController {
@@ -25,11 +21,11 @@ public class ProductRestController {
     ProductColorRepository productColorRepository;
 
     @GetMapping("/show")
-    public List<Product> allProduct(@RequestParam(defaultValue = "0") Integer pageNo,
+    public List<product> allProduct(@RequestParam(defaultValue = "0") Integer pageNo,
                                     @RequestParam(defaultValue = "50") Integer pageSize) {
         try {
             Pageable pageable = PageRequest.of(pageNo, pageSize);
-            Page<Product> pageResult = productJpaRepository.findAll(pageable);
+            Page<product> pageResult = productJpaRepository.findAll(pageable);
             return pageResult.getContent();
         } catch (Exception e) {
             throw new ProductException("Can not show all product:" + e);
@@ -37,7 +33,7 @@ public class ProductRestController {
     }
 
     @GetMapping("/show/{id}")
-    public Product show(@PathVariable Long id) {
+    public product show(@PathVariable Long id) {
         try {
             return productJpaRepository.findById(id).orElse(null);
         } catch (Exception e) {
@@ -46,7 +42,7 @@ public class ProductRestController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody Product newproduct) {
+    public void addProduct(@RequestBody product newproduct) {
         try {
             productJpaRepository.save(newproduct);
         } catch (Exception e) {
@@ -66,7 +62,7 @@ public class ProductRestController {
                      @RequestParam("images") String images,
                      @RequestParam("brandid") long brandid) {
         try {
-            Product product = productJpaRepository.findById(id).orElse(null);
+            product product = productJpaRepository.findById(id).orElse(null);
             product.setProductname(productname);
             product.setPrice(price);
             product.setWarranty(warranty);

@@ -2,7 +2,7 @@ FROM adoptopenjdk/openjdk11:latest
 
 VOLUME /tmp
 
-EXPOSE 8080
+EXPOSE 80
 
 ARG JAR_FILE=target/project-0.0.1-SNAPSHOT.jar
 

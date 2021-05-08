@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class Color {
+public class color {
   @Id
   @Getter
   @Setter
@@ -22,6 +22,6 @@ public class Color {
   @Setter
   private String colorcode;
   @OneToMany(mappedBy = "color")
-  Set<Productcolor> productcolor;
+  Set<int221.inegrated.models.productcolor> productcolor;
 
 }

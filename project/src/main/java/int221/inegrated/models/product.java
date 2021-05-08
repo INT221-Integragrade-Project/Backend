@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Product {
+public class product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter
@@ -41,8 +40,8 @@ public class Product {
   private long brandid;
   @ManyToOne
   @JoinColumn(name = "brandid",insertable = false,updatable = false)
-  private Brand brand;
+  private int221.inegrated.models.brand brand;
   @OneToMany(mappedBy = "product")
-  Set<Productcolor> productcolor;
+  Set<int221.inegrated.models.productcolor> productcolor;
 
 }

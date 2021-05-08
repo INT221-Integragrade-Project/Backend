@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class Brand {
+public class brand {
   @Id
   @Getter
   @Setter
@@ -19,6 +19,6 @@ public class Brand {
   @Setter
   private String brandname;
   @OneToMany(mappedBy = "brand")
-  Set<Product> product;
+  Set<int221.inegrated.models.product> product;
 
 }

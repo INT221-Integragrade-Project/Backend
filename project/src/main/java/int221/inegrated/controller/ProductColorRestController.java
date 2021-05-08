@@ -1,7 +1,6 @@
 package int221.inegrated.controller;
 
-import int221.inegrated.Exception.ProductException;
-import int221.inegrated.models.Productcolor;
+import int221.inegrated.models.productcolor;
 import int221.inegrated.repositories.ProductColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,15 +17,15 @@ public class ProductColorRestController {
     ProductColorRepository productColorRepository;
 
     @GetMapping("/showproductcolor")
-    public List<Productcolor> allProductcolor(@RequestParam(defaultValue = "0") Integer pageNo,
+    public List<productcolor> allProductcolor(@RequestParam(defaultValue = "0") Integer pageNo,
                                               @RequestParam(defaultValue = "50") Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Productcolor> pageResult = productColorRepository.findAll(pageable);
+        Page<productcolor> pageResult = productColorRepository.findAll(pageable);
         return pageResult.getContent();
     }
 
     @GetMapping("/showproductcolor/{id}")
-    public Productcolor showProductcolor(@PathVariable Long id) {
+    public productcolor showProductcolor(@PathVariable Long id) {
         return productColorRepository.findById(id).orElse(null);
     }
 

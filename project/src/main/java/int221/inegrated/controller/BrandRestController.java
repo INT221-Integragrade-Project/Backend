@@ -1,6 +1,6 @@
 package int221.inegrated.controller;
 
-import int221.inegrated.models.Brand;
+import int221.inegrated.models.brand;
 import int221.inegrated.repositories.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,15 +19,15 @@ public class BrandRestController {
     BrandRepository brandRepository;
 
     @GetMapping("/showbrand")
-    public List<Brand> showBrand(@RequestParam(defaultValue = "0") Integer pageNo,
+    public List<brand> showBrand(@RequestParam(defaultValue = "0") Integer pageNo,
                                  @RequestParam(defaultValue = "50") Integer pageSize){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Brand> pageResult = brandRepository.findAll(pageable);
+        Page<brand> pageResult = brandRepository.findAll(pageable);
         return pageResult.getContent();
     }
 
     @GetMapping("/showbrand/{id}")
-    public Brand showById(@PathVariable long id){
+    public brand showById(@PathVariable long id){
         return brandRepository.findById(id).orElse(null);
     }
 }

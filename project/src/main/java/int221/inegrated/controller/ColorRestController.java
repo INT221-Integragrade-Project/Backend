@@ -1,6 +1,6 @@
 package int221.inegrated.controller;
 
-import int221.inegrated.models.Color;
+import int221.inegrated.models.color;
 import int221.inegrated.repositories.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,15 +19,15 @@ public class ColorRestController {
     ColorRepository colorRepository;
 
     @GetMapping("/showallcolor")
-    public List<Color> showColor(@RequestParam(defaultValue = "0") Integer pageNo,
+    public List<color> showColor(@RequestParam(defaultValue = "0") Integer pageNo,
                                  @RequestParam(defaultValue = "50") Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Color> pageResult = colorRepository.findAll(pageable);
+        Page<color> pageResult = colorRepository.findAll(pageable);
         return pageResult.getContent();
     }
 
     @GetMapping("/showcolorbyid/{id}")
-    public Color showColorById(@PathVariable long id) {
+    public color showColorById(@PathVariable long id) {
         return colorRepository.findById(id).orElse(null);
     }
 }
