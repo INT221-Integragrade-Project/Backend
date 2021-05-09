@@ -2,6 +2,7 @@ package int221.inegrated.controller;
 
 import int221.inegrated.Exception.ProductException;
 import int221.inegrated.models.product;
+import int221.inegrated.models.productcolor;
 import int221.inegrated.repositories.ProductColorRepository;
 import int221.inegrated.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +44,19 @@ public class ProductRestController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody product newproduct) {
+    public void addProduct(@RequestBody product newproduct, @RequestParam Long colorid) {
         try {
             productJpaRepository.save(newproduct);
+            System.out.println(newproduct.getProductid());;
+            productcolor npc =  new productcolor();
+            npc.setProductid(newproduct.getProductid());
+            npc.setColorid(colorid);
+            productColorRepository.save(npc);
+            System.out.println(colorid);
         } catch (Exception e) {
             throw new ProductException("Can not add product: " + e);
         }
     }
-
 
     @PutMapping("/edit/{id}")
     public void edit(@PathVariable long id,
