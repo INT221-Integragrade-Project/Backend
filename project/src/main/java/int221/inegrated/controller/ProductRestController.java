@@ -45,14 +45,16 @@ public class ProductRestController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody product newproduct, @RequestParam Long colorid) {
+    public void addProduct(@RequestBody product newproduct, @RequestParam("colorid") Long[] colorid) {
         try {
             productJpaRepository.save(newproduct);
-            System.out.println(newproduct.getProductid());;
-            productcolor npc =  new productcolor();
-            npc.setProductid(newproduct.getProductid());
-            npc.setColorid(colorid);
-            productColorRepository.save(npc);
+            System.out.println(newproduct.getProductid());
+            for (int i = 0; i < colorid.length; i++) {
+                productcolor npc = new productcolor();
+                npc.setProductid(newproduct.getProductid());
+                npc.setColorid(colorid[i]);
+                productColorRepository.save(npc);
+            }
             System.out.println(colorid);
         } catch (Exception e) {
             throw new ProductException("Can not add product: " + e);
@@ -88,10 +90,13 @@ public class ProductRestController {
     @DeleteMapping("/deleteproductid")
     public void delete(@RequestParam("deleteproductid") long id) {
         try {
+            int countproductcolor = productColorRepository.countByProductid(id);
+            for (int i = 0; i < countproductcolor; i++) {
+                productColorRepository.deleteById(productColorRepository.findAllByProductid(id).get(0).getProductcolorid());
+            }
             productJpaRepository.deleteById(id);
             System.out.println("You delete Product: " + id);
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             throw new ProductException("Can not delete product: " + e);
         }
     }

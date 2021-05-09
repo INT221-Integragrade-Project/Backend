@@ -30,12 +30,4 @@ public class ProductColorRestController {
         return productColorRepository.findById(id).orElse(null);
     }
 
-    @DeleteMapping("/deletePodCol")
-    public void deleteProductColor(@RequestParam("deletePodCol") long id) {
-        int countproductcolor = productColorRepository.countByProductid(id);
-        for (int i = 0; i < countproductcolor; i++) {
-            productColorRepository.deleteById(productColorRepository.findAllByProductid(id).get(0).getProductcolorid());
-
-        }
-    }
 }
