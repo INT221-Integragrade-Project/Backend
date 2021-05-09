@@ -32,8 +32,8 @@ public class PictureRestController {
         return storageService.loadAsResource(filename);
     }
 
-    @DeleteMapping(value = "/deletefile/{filename}", produces = MediaType.IMAGE_PNG_VALUE)
-    public void deleteFile(@RequestParam("images") String filename) throws IOException {
+    @DeleteMapping(value = "/deletefile", produces = MediaType.IMAGE_PNG_VALUE)
+    public void deleteFile(@RequestParam("imagesdelete") String filename) throws IOException {
         storageService.delete(filename);
     }
 }
