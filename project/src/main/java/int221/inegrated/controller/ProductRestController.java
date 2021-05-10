@@ -25,7 +25,7 @@ public class ProductRestController {
     @Autowired
     ProductColorRepository productColorRepository;
 
-    @GetMapping("/show")
+    @GetMapping("/product")
     public List<product> allProduct(@RequestParam(defaultValue = "0") Integer pageNo,
                                     @RequestParam(defaultValue = "50") Integer pageSize) {
         try {
@@ -37,7 +37,7 @@ public class ProductRestController {
         }
     }
 
-    @GetMapping("/show/{id}")
+    @GetMapping("/product/{id}")
     public product show(@PathVariable Long id) {
         try {
             return productJpaRepository.findById(id).orElse(null);
