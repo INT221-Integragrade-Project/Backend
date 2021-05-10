@@ -19,7 +19,7 @@ public class ProductColorRestController {
 
     @GetMapping("/showproductcolor")
     public List<productcolor> allProductcolor(@RequestParam(defaultValue = "0") Integer pageNo,
-                                              @RequestParam(defaultValue = "50") Integer pageSize) {
+                                              @RequestParam(defaultValue = "5000") Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<productcolor> pageResult = productColorRepository.findAll(pageable);
         return pageResult.getContent();
