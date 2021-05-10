@@ -47,15 +47,32 @@ public class ProductRestController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody product newproduct, @RequestParam("colorid") String[] colorid) {
+    public void addProduct(@RequestParam("productname") String productname,
+                           @RequestParam("price") double price,
+                           @RequestParam("warranty") long warranty,
+                           @RequestParam("menufacturrerdate") java.sql.Date menufacturrerdate,
+                           @RequestParam("capacity") long capacity,
+                           @RequestParam("description") String description,
+                           @RequestParam("images") String images,
+                           @RequestParam("brandid") long brandid,
+                           @RequestParam("colorid") Long[] colorid) {
         try {
+            product newproduct = new product();
+            newproduct.setProductname(productname);
+            newproduct.setPrice(price);
+            newproduct.setWarranty(warranty);
+            newproduct.setMenufacturrerdate(menufacturrerdate);
+            newproduct.setCapacity(capacity);
+            newproduct.setDescription(description);
+            newproduct.setImages(images);
+            newproduct.setBrandid(brandid);
             productJpaRepository.save(newproduct);
             System.out.println(newproduct.getProductid());
             for (int i = 0; i < colorid.length; i++) {
                 productcolor npc = new productcolor();
-                Long test = Long.parseLong(colorid[i]);
+//                Long test = Long.parseLong(colorid[i]);
                 npc.setProductid(newproduct.getProductid());
-                npc.setColorid(test);
+                npc.setColorid(colorid[i]);
                 productColorRepository.save(npc);
             }
             System.out.println(colorid);

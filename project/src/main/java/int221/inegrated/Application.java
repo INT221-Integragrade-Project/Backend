@@ -18,10 +18,6 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
-        return (args) -> {
-//            storageService.deleteAll();
-//            storageService.init();
-        };}
+    CommandLineRunner init(StorageService storageService) {return (args) -> {};}
 
 }
