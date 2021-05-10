@@ -1,11 +1,13 @@
 package int221.inegrated.controller;
 
+import com.google.api.client.testing.http.HttpTesting;
 import int221.inegrated.Exception.ProductException;
 import int221.inegrated.file.StorageService;
 import int221.inegrated.models.product;
 import int221.inegrated.models.productcolor;
 import int221.inegrated.repositories.ProductColorRepository;
 import int221.inegrated.repositories.ProductRepository;
+import org.apache.maven.plugin.lifecycle.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,14 +47,15 @@ public class ProductRestController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody product newproduct, @RequestParam("colorid") Long[] colorid) {
+    public void addProduct(@RequestBody product newproduct, @RequestParam("colorid") String[] colorid) {
         try {
             productJpaRepository.save(newproduct);
             System.out.println(newproduct.getProductid());
             for (int i = 0; i < colorid.length; i++) {
                 productcolor npc = new productcolor();
+                Long test = Long.parseLong(colorid[i]);
                 npc.setProductid(newproduct.getProductid());
-                npc.setColorid(colorid[i]);
+                npc.setColorid(test);
                 productColorRepository.save(npc);
             }
             System.out.println(colorid);
